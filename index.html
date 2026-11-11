@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>⚛️ 리액트 탄생 배경 체험하기 — 미션 허브</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: #0f1220;
+        color: #eef0f6;
+      }
+      .hero { max-width: 880px; margin: 0 auto; padding: 56px 24px 24px; }
+      .hero h1 { font-size: 26px; margin: 0 0 12px; }
+      .hero p { color: #9aa0b5; font-size: 14px; line-height: 1.7; margin: 0; }
+      .grid {
+        max-width: 880px; margin: 24px auto 56px; padding: 0 24px;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      }
+      a.card {
+        display: block; text-decoration: none; color: inherit;
+        background: #171b2e; border: 1px solid #262c47; border-radius: 14px;
+        padding: 18px; transition: transform .1s ease, border-color .1s ease;
+      }
+      a.card:hover { transform: translateY(-2px); border-color: #61dafb; }
+      .chapter { font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+      .chapter.problem { color: #ff6b6b; }
+      .chapter.solution { color: #61dafb; }
+      .chapter.tradeoff { color: #ffd166; }
+      .card h2 { font-size: 16px; margin: 8px 0 6px; }
+      .card p { font-size: 13px; color: #9aa0b5; line-height: 1.6; margin: 0; }
+      footer { text-align: center; color: #6b7290; font-size: 12px; padding: 24px; }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <h1>⚛️ 리액트가 탄생한 배경을 직접 체험하는 저장소</h1>
+      <p>
+        2011년 페이스북 광고팀의 고통에서 시작해, 2013년 5월 JSConf US에서 세상에 나온 React.<br />
+        "문제 상황 → 리액트로 해결 → 트레이드오프" 순서로, 코드를 직접 짜면서 체감합니다.<br />
+        각 미션의 자세한 설명은 <b>missions/ 폴더 안의 README.md</b>, 전체 가이드는 <b>루트 README.md</b>를 참고하세요.
+      </p>
+    </header>
+
+    <main class="grid">
+      <a class="card" href="/missions/01-dom-hell/">
+        <span class="chapter problem">CHAPTER 1 · 문제 (리액트 이전)</span>
+        <h2>미션 1 · DOM 지옥에서 살아남기</h2>
+        <p>바닐라 JS로 할 일 앱을 만들며, 데이터와 화면을 사람이 일일이 동기화해야 하는 2011년의 고통을 체감합니다.</p>
+      </a>
+      <a class="card" href="/missions/02-react-declarative/">
+        <span class="chapter solution">CHAPTER 2 · 해결 (리액트)</span>
+        <h2>미션 2 · 같은 앱을 React로 다시 짜기</h2>
+        <p>미션 1과 똑같은 앱을 선언형으로 다시 만들며 "갱신 코드가 사라지는" 마법을 체감합니다.</p>
+      </a>
+      <a class="card" href="/missions/03-state-sync/react/">
+        <span class="chapter solution">CHAPTER 2 · 해결 (리액트)</span>
+        <h2>미션 3 · 상태 끌어올리기 (단방향 데이터 흐름)</h2>
+        <p>서로 동기화되지 않는 두 입력의 버그를, "상태 끌어올리기"로 고치며 UI = f(state)를 체감합니다.</p>
+      </a>
+      <a class="card" href="/missions/04-rerender-cost/react/">
+        <span class="chapter tradeoff">CHAPTER 3 · 트레이드오프</span>
+        <h2>미션 4 · 재렌더링의 비용 (10,000개 리스트)</h2>
+        <p>바닐라의 부분 갱신 vs React의 전체 재렌더를 측정하고, memo와 key로 성능을 되찾는 과정을 체감합니다.</p>
+      </a>
+      <a class="card" href="/missions/04-rerender-cost/vanilla/">
+        <span class="chapter tradeoff">CHAPTER 3 · 트레이드오프</span>
+        <h2>미션 4-① · 바닐라 기준선 측정</h2>
+        <p>React 없이 "필요한 곳만" 고치면 얼마나 빠른지 기준선을 직접 측정합니다.</p>
+      </a>
+      <a class="card" href="/missions/05-form-binding/native/">
+        <span class="chapter tradeoff">CHAPTER 3 · 트레이드오프</span>
+        <h2>미션 5-① · 네이티브 폼의 자유</h2>
+        <p>HTML 폼은 DOM이 값을 기억하므로 코드가 아주 짧습니다. 이게 React가 포기한 편의입니다.</p>
+      </a>
+      <a class="card" href="/missions/05-form-binding/react/">
+        <span class="chapter tradeoff">CHAPTER 3 · 트레이드오프</span>
+        <h2>미션 5-② · 제어 컴포넌트의 대가</h2>
+        <p>양방향 바인딩을 버린 React의 폼은 왜 이렇게 코드가 길어졌을까요? 매 키입력의 재렌더를 측정합니다.</p>
+      </a>
+      <a class="card" href="/missions/06-hook-pitfalls/react/">
+        <span class="chapter tradeoff">CHAPTER 3 · 트레이드오프</span>
+        <h2>미션 6 · 훅(Hooks)의 함정</h2>
+        <p>고장 난 타이머를 고치며 상태 스냅샷, 클로저, 의존성 배열이라는 새로운 인지 비용을 체감합니다.</p>
+      </a>
+    </main>
+
+    <footer>mission 문서: missions/*/README.md · 전체 가이드 &amp; 출처: README.md</footer>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>미션 4-① · 바닐라 기준선 측정</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: #f5f6fa; color: #222;
+      }
+      .app {
+        max-width: 860px; margin: 40px auto; padding: 28px;
+        background: #fff; border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.07);
+      }
+      h1 { margin: 0 0 6px; font-size: 22px; }
+      .sub { margin: 0 0 18px; color: #777; font-size: 13px; line-height: 1.6; }
+      .row { display: flex; gap: 8px; margin: 12px 0; align-items: center; }
+      button {
+        padding: 10px 16px; border: none; border-radius: 8px;
+        background: #4b7bec; color: #fff; font-size: 14px; cursor: pointer;
+      }
+      button:hover { filter: brightness(1.05); }
+      table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+      th, td { border-bottom: 1px solid #eee; padding: 6px 10px; text-align: left; }
+      thead th { background: #f7f9fd; position: sticky; top: 0; }
+      .wrap { max-height: 420px; overflow: auto; border: 1px solid #eee; border-radius: 10px; }
+      .log { margin-top: 18px; padding: 14px; background: #f1f5ff; border-radius: 10px; font-size: 13px; }
+      .log table { font-size: 13px; }
+      .log td { padding: 4px 10px; }
+      .log .label { font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <h1>📦 10,000개 상품 리스트 — 바닐라 기준선</h1>
+      <p class="sub">
+        3번 상품의 가격을 바꾸는 두 가지 방식의 시간을 직접 측정해 비교합니다.<br />
+        ① 전체 다시 그리기 vs ② 바뀐 셀 하나만 고치기
+      </p>
+
+      <div class="row">
+        <button id="btn-all" type="button">① 전체 다시 그리기</button>
+        <button id="btn-one" type="button">② 필요한 곳만 고치기</button>
+      </div>
+
+      <div class="wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>상품명</th><th>가격</th></tr>
+          </thead>
+          <tbody id="product-rows"></tbody>
+        </table>
+      </div>
+
+      <section class="log">
+        <strong>📏 측정 기록</strong>
+        <table>
+          <tbody id="measure-log"></tbody>
+        </table>
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

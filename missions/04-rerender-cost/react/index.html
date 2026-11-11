@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>미션 4-② · React 재렌더링의 비용</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: #f5f6fa; color: #222;
+      }
+      .app {
+        max-width: 860px; margin: 40px auto; padding: 28px;
+        background: #fff; border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.07);
+      }
+      h1 { margin: 0 0 6px; font-size: 22px; }
+      h2 { font-size: 16px; margin: 24px 0 8px; }
+      .sub { margin: 0 0 18px; color: #777; font-size: 13px; line-height: 1.6; }
+      .row { display: flex; gap: 8px; margin: 12px 0; align-items: center; }
+      button {
+        padding: 10px 16px; border: none; border-radius: 8px;
+        background: #4b7bec; color: #fff; font-size: 14px; cursor: pointer;
+      }
+      button:hover { filter: brightness(1.05); }
+      button.ghost { background: #eef1f7; color: #444; }
+      .stats {
+        display: flex; gap: 24px; padding: 14px; background: #f1f5ff;
+        border-radius: 10px; font-size: 14px; flex-wrap: wrap;
+      }
+      table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 13px; }
+      th, td { border-bottom: 1px solid #eee; padding: 6px 10px; text-align: left; }
+      thead th { background: #f7f9fd; position: sticky; top: 0; }
+      .wrap { max-height: 380px; overflow: auto; border: 1px solid #eee; border-radius: 10px; }
+      .key-demo { margin-top: 28px; padding: 18px; background: #fffbea; border-radius: 10px; }
+      .key-demo li { display: flex; gap: 10px; align-items: center; margin: 8px 0; }
+      .key-demo input[type="text"] { padding: 8px 10px; border: 1px solid #ddd; border-radius: 8px; }
+      .key-demo .who { font-size: 13px; color: #555; min-width: 60px; font-weight: 700; }
+      .hint { font-size: 12.5px; color: #8a6d1a; line-height: 1.7; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.jsx"></script>
+  </body>
+</html>

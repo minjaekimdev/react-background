@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>미션 5-① · 네이티브 폼의 자유</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: #f5f6fa; color: #222;
+      }
+      .app {
+        max-width: 520px; margin: 40px auto; padding: 28px;
+        background: #fff; border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.07);
+      }
+      h1 { margin: 0 0 6px; font-size: 22px; }
+      .sub { margin: 0 0 18px; color: #777; font-size: 13px; line-height: 1.6; }
+      form { display: flex; flex-direction: column; gap: 14px; }
+      label { font-size: 13px; color: #555; font-weight: 600; display: block; }
+      input[type="text"], input[type="email"], input[type="password"], textarea {
+        width: 100%; margin-top: 6px; padding: 10px 12px;
+        border: 1px solid #ddd; border-radius: 8px; font-size: 14px; font-family: inherit;
+      }
+      textarea { resize: vertical; min-height: 80px; }
+      .check { display: flex; align-items: center; gap: 8px; font-weight: 400; }
+      .check input { width: auto; }
+      .hint { font-weight: 400; color: #999; font-size: 12px; margin-top: 4px; }
+      .msg { font-size: 12.5px; margin-top: 6px; min-height: 18px; }
+      .msg.ok { color: #2ecc71; }
+      .msg.bad { color: #e74c3c; }
+      button {
+        padding: 11px; border: none; border-radius: 8px;
+        background: #4b7bec; color: #fff; font-size: 15px; cursor: pointer;
+      }
+      .panel {
+        margin-top: 20px; padding: 14px; background: #f1f5ff;
+        border-radius: 10px; font-size: 13px; line-height: 1.7;
+      }
+      .panel b { color: #3867d6; }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <h1>🧾 회원가입 폼 — 네이티브 HTML</h1>
+      <p class="sub">
+        트레이드오프 ② 1부. React 없이 순수 HTML 폼입니다.<br />
+        값은 <b>DOM이 기억</b>합니다. 코드가 짧은 이유를 느껴 보세요.
+      </p>
+
+      <form id="signup-form">
+        <div>
+          <label for="email">이메일</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+        <div>
+          <label for="password">비밀번호</label>
+          <input id="password" name="password" type="password" required />
+        </div>
+        <div>
+          <label for="password-check">비밀번호 확인</label>
+          <input id="password-check" name="password-check" type="password" required />
+          <p class="msg" id="pw-match"></p>
+        </div>
+        <div>
+          <label for="nickname">닉네임</label>
+          <input id="nickname" name="nickname" type="text" required />
+        </div>
+        <div>
+          <label for="bio">자기소개 (최대 100자)</label>
+          <textarea id="bio" name="bio" maxlength="100"></textarea>
+          <p class="hint"><span id="bio-count">0</span> / 100자</p>
+        </div>
+        <label class="check">
+          <input type="checkbox" name="marketing" />
+          마케팅 정보 수신에 동의합니다
+        </label>
+        <button type="submit">제출</button>
+      </form>
+
+      <section class="panel">
+        💡 <b>미션 5-②</b>(React 버전)에서 이와 <b>완전히 같은 폼</b>을 만듭니다.
+        그때 이 폼에서 쓰지 않았던 코드들(state, onChange, 불변성 spread)이 어떻게 늘어나는지 비교하게 됩니다.
+      </section>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

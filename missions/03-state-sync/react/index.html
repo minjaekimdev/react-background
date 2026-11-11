@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>미션 3 · 상태 끌어올리기 — 온도 변환기</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: #f5f6fa; color: #222;
+      }
+      .app {
+        max-width: 480px; margin: 40px auto; padding: 28px;
+        background: #fff; border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.07);
+      }
+      h1 { margin: 0 0 6px; font-size: 22px; }
+      .sub { margin: 0 0 18px; color: #777; font-size: 13px; }
+      .field { display: block; margin: 14px 0; font-size: 14px; color: #555; }
+      .field input {
+        display: block; width: 100%; margin-top: 6px; padding: 10px 12px;
+        border: 1px solid #ddd; border-radius: 8px; font-size: 16px;
+      }
+      .verdict {
+        margin: 18px 0 0; padding: 14px; border-radius: 10px;
+        background: #f1f5ff; font-size: 15px; font-weight: 600;
+      }
+      .verdict.hot { background: #fff4e5; color: #d35400; }
+      .warn {
+        margin: 18px 0 0; padding: 12px 14px; border-radius: 10px;
+        background: #fff0f0; color: #c0392b; font-size: 13px; line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.jsx"></script>
+  </body>
+</html>

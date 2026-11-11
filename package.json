@@ -1,0 +1,20 @@
+{
+  "name": "react-background",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "리액트가 탄생한 배경(문제)과 해결, 그리고 트레이드오프를 직접 구현하며 체감하는 미션 저장소",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.0",
+    "vite": "^8.0.0"
+  }
+}

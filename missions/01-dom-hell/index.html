@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>미션 1 · DOM 지옥 — 바닐라 JS 할 일 앱</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+        background: #f5f6fa; color: #222;
+      }
+      .app {
+        max-width: 560px; margin: 40px auto; padding: 28px;
+        background: #fff; border-radius: 14px; box-shadow: 0 6px 24px rgba(0,0,0,.07);
+      }
+      h1 { margin: 0 0 6px; font-size: 22px; }
+      .sub { margin: 0 0 18px; color: #777; font-size: 13px; }
+      .header { display: flex; align-items: center; gap: 8px; margin: 8px 0 4px; }
+      .badge { background: #4b7bec; color: #fff; border-radius: 999px; padding: 2px 12px; font-weight: 700; }
+      .row { display: flex; gap: 8px; margin: 12px 0; align-items: center; }
+      .row input[type="text"] {
+        flex: 1; padding: 9px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px;
+      }
+      button {
+        padding: 9px 14px; border: none; border-radius: 8px;
+        background: #4b7bec; color: #fff; font-size: 14px; cursor: pointer;
+      }
+      button:hover { filter: brightness(1.05); }
+      button.ghost { background: #eef1f7; color: #444; }
+      .quick button { background: #eef1f7; color: #444; }
+      .todo-list { list-style: none; margin: 12px 0; padding: 0; }
+      .todo {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 10px 12px; border: 1px solid #eee; border-radius: 10px;
+        margin-bottom: 8px; background: #fafbfd;
+      }
+      .todo.done span { text-decoration: line-through; color: #aaa; }
+      .todo .todo-delete { background: #ffe3e3; color: #d63031; padding: 6px 10px; font-size: 12px; }
+      .summary {
+        display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+        padding: 14px; background: #f1f5ff; border-radius: 10px; font-size: 14px;
+      }
+      .cheer { color: #2ecc71; font-weight: 700; }
+      #progress-wrap { flex: 1; min-width: 120px; height: 8px; background: #e3e8f5; border-radius: 999px; overflow: hidden; }
+      #progress-bar { height: 100%; width: 0%; background: #2ecc71; transition: width .2s ease; }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <h1>📝 오늘의 할 일</h1>
+      <p class="sub">바닐라 JS + 수동 DOM 조작 버전 (2011년의 우리)</p>
+
+      <!-- UI 조각 ① 헤더 뱃지 -->
+      <header class="header">
+        <span class="badge" id="todo-count">0</span>
+        <span>개의 할 일이 있습니다</span>
+      </header>
+
+      <!-- UI 조각 ② 추가 폼 -->
+      <form id="todo-form" class="row">
+        <input id="todo-input" type="text" placeholder="새 할 일을 입력하세요" autocomplete="off" />
+        <button type="submit">추가</button>
+      </form>
+
+      <!-- UI 조각 ③ 빠른 추가 버튼 (STEP 3에서 사용) -->
+      <div class="row quick" id="quick-add">
+        <button type="button" data-text="물 마시기">💧 물 마시기</button>
+        <button type="button" data-text="산책하기">🚶 산책하기</button>
+        <button type="button" data-text="미션 2 예고 읽기">📖 미션 2 예고</button>
+      </div>
+
+      <!-- UI 조각 ④ 할 일 목록 -->
+      <ul id="todo-list" class="todo-list"></ul>
+
+      <!-- UI 조각 ⑤ 요약 패널 -->
+      <section class="summary">
+        <div>전체 <strong id="summary-all">0</strong></div>
+        <div>완료 <strong id="summary-done">0</strong></div>
+        <div>남음 <strong id="summary-left">0</strong></div>
+        <div id="progress-wrap"><div id="progress-bar"></div></div>
+        <div class="cheer" id="cheer"></div>
+      </section>
+
+      <div class="row">
+        <button type="button" class="ghost" id="clear-done">✅ 완료 항목 삭제 (STEP 4)</button>
+      </div>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
