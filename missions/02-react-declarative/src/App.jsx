@@ -25,17 +25,13 @@ export default function App() {
   function toggleTodo(id) {
     // TODO (STEP 2): map 으로 해당 항목의 done 만 뒤집은 새 배열을 만드세요.
     setTodos(
-      todos.map((todo) => {
-        if (todo.id === id) {
-          todo.done = !todo.done;
-        }
-      }),
+      todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : t)),
     );
   }
 
   function deleteTodo(id) {
     // TODO (STEP 2): filter 로 제거한 새 배열을 만드세요.
-    setTodos(todos.filter((todo) => todo.done === false));
+    setTodos(todos.filter((todo) => todo.id !== id));
   }
 
   return (
@@ -68,11 +64,24 @@ function AddTodoForm({ onAdd }) {
   //  <input value={text} onChange={(e) => setText(e.target.value)} />
   //  (이런 걸 "제어 컴포넌트"라고 합니다. 장단점은 미션 5에서!)
   const [text, setText] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    onAdd(trimmed);
+    setText("");
+  }
+
   return (
-    <form className="row" onSubmit={(e) => e.preventDefault()}>
-      {/* TODO: input + "추가" button — 제출 시 onAdd(text) 호출 후 입력창 비우기 */}
-      <input value={text} onChange={(e) => setText(e.target.value)} />
-      <button onClick={() => onAdd(text)}>추가</button>
+    <form className="row" onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="새 할 일을 입력하세요"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+      <button type="submit">추가</button>
     </form>
   );
 }
@@ -85,7 +94,7 @@ function QuickAddRow({ onAdd }) {
   return (
     <div className="row quick">
       {QUICK_ITEMS.map((item) => (
-        <button onClick={() => onAdd(item)} type="button">
+        <button key={item} onClick={() => onAdd(item)} type="button">
           {item}
         </button>
       ))}
@@ -96,7 +105,18 @@ function QuickAddRow({ onAdd }) {
 function TodoList({ todos, onToggle, onDelete }) {
   // TODO (STEP 2): todos.map 으로 TodoItem 을 그리세요.
   //  💡 key 로 무엇을 쓸지 고민해 보세요. (배열 인덱스? id? — 미션 4에서 다시 만납니다.)
-  return <ul className="todo-list">{/* TODO */}</ul>;
+  return (
+    <ul className="todo-list">
+      {todos.map((todo) => (
+        <TodoItem
+          key={todo.id}
+          todo={todo}
+          onToggle={onToggle}
+          onDelete={onDelete}
+        />
+      ))}
+    </ul>
+  );
 }
 
 function TodoItem({ todo, onToggle, onDelete }) {
@@ -126,5 +146,26 @@ function Summary({ todos }) {
   //  💡 이 값들을 useState 로 저장할 필요가 있을까요?
   //  (계산 가능한 값은 상태로 저장하지 않습니다 — 항상 최신 계산값이 보장되니까!)
   //  남음이 0이면 '🎉 전부 끝냈어요!' 를, 진행률 바도 그려 보세요.
-  return <section className="summary">{/* TODO */}</section>;
+  const all = todos.length;
+  const done = todos.filter((t) => t.done).length;
+  const left = all - done;
+  const percent = all === 0 ? 0 : (done / all) * 100;
+
+  return (
+    <section className="summary">
+      <div>
+        전체 <strong>{all}</strong>
+      </div>
+      <div>
+        완료 <strong>{done}</strong>
+      </div>
+      <div>
+        남음 <strong>{left}</strong>
+      </div>
+      <div id="progress-wrap">
+        <div id="progress-bar" style={{ width: `${percent}%` }} />
+      </div>
+      {all > 0 && left === 0 && <div className="cheer">🎉 전부 끝냈어요!</div>}
+    </section>
+  );
 }
