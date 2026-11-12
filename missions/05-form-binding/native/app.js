@@ -18,6 +18,12 @@ form.addEventListener('submit', (e) => {
   // 2) Object.fromEntries(formData) 도 찍어 보세요. 체크박스 값은 어떻게 담기는지 확인!
   //    (체크박스는 체크됐을 때만 name="on" 으로 들어옵니다 — DOM이 관리하니까요)
   // 3) 콘솔에 출력
+
+  const formData = new FormData(form);
+  const values = Object.fromEntries(formData);
+
+  console.log(formData);
+  console.log(values);
 });
 
 // ---------- TODO (STEP 2): 자기소개 글자 수 카운터 ----------
@@ -28,6 +34,11 @@ form.addEventListener('submit', (e) => {
 // 💡 여기서 글자 수 값을 어디에 "저장"했는지 돌아보세요.
 //    저장 안 했죠? 필요할 때마다 DOM에서 "읽기만" 했습니다.
 //    값의 원본이 DOM이기 때문에 동기화 버그도 없습니다.
+bioEl.addEventListener('input', () => {
+  bioCountEl.textContent = String(bioEl.value.length);
+  bioCountEl.style.color = bioEl.value.length >= 100 ? '#e74c3c' : '#999';
+})
+
 
 // ---------- TODO (STEP 3): 비밀번호 일치 표시 ----------
 // pwEl 과 pwCheckEl 의 input 이벤트에서:
@@ -36,3 +47,18 @@ form.addEventListener('submit', (e) => {
 //
 // 💡 관찰: 파생 표시(카운터, 일치 문구)만 화면 갱신 코드를 썼습니다.
 //    "값 저장" 코드는 단 한 줄도 없습니다. 이게 DOM = 원본 세계입니다.
+
+function updatePwMatch() {
+  const bothFilled = pwEl.value && pwCheckEl.value;
+  const matched = pwEl.value === pwCheckEl.value;
+  if (!bothFilled) {
+    pwMatchEl.textContent = '';
+    pwMatchEl.className = 'msg';
+    return;
+  }
+  pwMatchEl.textContent = matched ? '✅ 일치합니다' : '❌ 일치하지 않습니다';
+  pwMatchEl.className = matched ? 'msg ok' : 'msg bad';
+}
+
+pwEl.addEventListener('input', updatePwMatch);
+pwCheckEl.addEventListener('input', updatePwMatch);
