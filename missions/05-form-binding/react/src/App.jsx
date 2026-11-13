@@ -57,7 +57,8 @@ export default function App() {
     <main className="app">
       <h1>🧾 회원가입 폼 — React</h1>
       <p className="sub">
-        트레이드오프 ② 2부. 미션 5-①과 같은 폼입니다. 지금은 "비제어"입니다.
+        트레이드오프 ② 2부. 미션 5-①과 같은 폼입니다. STEP 3~5를 거쳐 제어
+        컴포넌트가 되었습니다. (🐛 비제어 시절 코드는 아래 주석 참고)
       </p>
 
       <p className="stat">
@@ -66,14 +67,26 @@ export default function App() {
             타이핑할 때 숫자가 얼마나 늘어나는지(또는 안 늘어나는지) 흐름으로 보세요. */}
       </p>
 
+      {/* 🐛 고치기 전 (STEP 1 비제어 상태, 기록용): input 에 value/onChange 가 없어
+          값의 원본이 DOM 이었습니다. 타이핑해도 App 은 재렌더되지 않았고(렌더 횟수 0 유지),
+          실시간 카운터·비밀번호 일치 표시를 만들 방법이 없었습니다.
+          <input name="email" type="email" required />
+          <input name="password" type="password" required />
+          <input name="password-check" type="password" required />
+          <p className="msg" id="pw-match"></p>
+          <input name="nickname" type="text" required />
+          <textarea name="bio" maxLength={100}></textarea>
+          <p className="hint"><span>0</span> / 100자</p>
+          <input type="checkbox" name="marketing" />
+      */}
       <form onSubmit={handleSubmit}>
         <label>
           이메일
           <input
             name="email"
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
             required
           />
         </label>

@@ -24,13 +24,35 @@ export default function App() {
 
   function toggleTodo(id) {
     // TODO (STEP 2): map 으로 해당 항목의 done 만 뒤집은 새 배열을 만드세요.
+    //
+    // 🐛 고치기 전 버그 코드 (기록용):
+    //   1) map 콜백이 새 객체를 만들지 않고 원본 todo.done 을 "직접 수정"(뮤테이션)
+    //   2) return 이 없어 map 결과가 [undefined, undefined, ...] 가 됨
+    //      → setTodos(그런 배열) 로 목록이 통째로 깨지고, 원본 데이터도 오염됐습니다.
+    // setTodos(
+    //   todos.map((todo) => {
+    //     if (todo.id === id) {
+    //       todo.done = !todo.done;
+    //     }
+    //   }),
+    // );
+
+    // ✅ 해결: 바뀐 항목만 "새 객체"로 교체하고, 나머지는 기존 객체 그대로(같은 참조)
     setTodos(
-      todos.map((todo) => (todo.id === id ? { ...todo, done: !todo.done } : t)),
+      todos.map(
+        (todo) => (todo.id === id ? { ...todo, done: !todo.done } : todo),
+      ),
     );
   }
 
   function deleteTodo(id) {
     // TODO (STEP 2): filter 로 제거한 새 배열을 만드세요.
+    //
+    // 🐛 고치기 전 버그 코드 (기록용): id 를 전혀 사용하지 않았습니다.
+    //   → 삭제 버튼을 누르면 클릭한 항목이 아니라 "완료된 항목 전부"가 사라졌습니다.
+    // setTodos(todos.filter((todo) => todo.done === false));
+
+    // ✅ 해결: 클릭한 id "하나"만 제외한 새 배열
     setTodos(todos.filter((todo) => todo.id !== id));
   }
 
@@ -65,6 +87,15 @@ function AddTodoForm({ onAdd }) {
   //  (이런 걸 "제어 컴포넌트"라고 합니다. 장단점은 미션 5에서!)
   const [text, setText] = useState("");
 
+  // 🐛 고치기 전 버그 코드 (기록용): form 은 새로고침만 막았고, onAdd 호출은 버튼 onClick 에만 존재
+  //   → Enter 키로 제출하면 추가가 실행되지 않고, 빈 문자열도 그대로 추가됐습니다.
+  // <form className="row" onSubmit={(e) => e.preventDefault()}>
+  //   <input value={text} onChange={(e) => setText(e.target.value)} />
+  //   <button onClick={() => onAdd(text)}>추가</button>
+  // </form>
+
+  // ✅ 해결: 제출 경로를 onSubmit 하나로 모으고(버튼 클릭 + Enter 모두 커버),
+  //          trim 으로 공백뿐인 입력을 걸러낸 뒤, 추가 후 입력창을 비웁니다.
   function handleSubmit(e) {
     e.preventDefault();
     const trimmed = text.trim();
@@ -93,6 +124,8 @@ function QuickAddRow({ onAdd }) {
   //  이유를 README 성찰 질문에 적어 보세요.
   return (
     <div className="row quick">
+      {/* 🐛 고치기 전: <button onClick={() => onAdd(item)} type="button"> — key 가 없어
+          콘솔에 "Each child in a list should have a unique 'key' prop" 경고가 나왔습니다. */}
       {QUICK_ITEMS.map((item) => (
         <button key={item} onClick={() => onAdd(item)} type="button">
           {item}

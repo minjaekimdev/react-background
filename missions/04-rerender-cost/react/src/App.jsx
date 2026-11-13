@@ -22,6 +22,11 @@ function resetRenderStats() {
 }
 
 // ---------- TODO (STEP B): 이 컴포넌트를 React.memo 로 감싸세요 ----------
+//
+// 🐛 memo 적용 전 (기록용): 감싸지 않은 평범한 함수 컴포넌트였습니다.
+//   function ProductRow({ product }) { ... }   ← body 는 지금과 동일
+//   → 3번 상품 가격 "1개"만 바뀌어도 부모 App 의 재렌더를 따라
+//     10,000개 행이 전부 다시 실행됐습니다. (측정 패널의 "실행된 행 수 10,000")
 const ProductRow = memo(function ProductRow({ product }) {
   const t0 = performance.now();
   const row = (

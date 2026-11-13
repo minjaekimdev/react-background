@@ -51,6 +51,8 @@ function renderList() {
 //   남음 = 전체 - 완료
 //   남음이 0이면 cheerEl.textContent = '🎉 전부 끝냈어요!'
 //   진행률(%) = (완료 / 전체) * 100  → progressBarEl.style.width = '50%'
+// ✅ STEP 1에서 구현한 함수 — 스타터에는 이 함수 자체가 없어서
+//    뱃지·요약·진행률은 0인 채로 멈춰 있었습니다 (아래 "앱 시작" 주석 참고).
 function renderStats() {
   const all = todos.length;
   const done = todos.filter((todo) => todo.done).length;
@@ -108,6 +110,13 @@ document.querySelector("#quick-add").addEventListener("click", (e) => {
   todos.push({ id: nextId++, text, done: false });
 
   //  3) renderList() 호출
+  //
+  // 🐛 STEP 3 의도적 버그 (기록용): renderStats() 호출을 빼고 실행해 보면
+  //   → 목록에는 "💧 물 마시기"가 생기는데 뱃지·요약·진행률은 그대로인
+  //     데이터-화면 불일치가 발생했습니다 (갱신 한 줄을 빼먹은 것뿐인데!).
+  // renderList();
+  // renderStats(); // ← 이 한 줄을 빼먹으면 화면이 어긋납니다 (빼먹은 채로 실행해 봄)
+
   renderList();
   renderStats();
 });
@@ -154,6 +163,13 @@ document.querySelector("#clear-done").addEventListener("click", () => {
 });
 
 // ---------- 앱 시작 ----------
+// 🐛 스타터의 모습 (기록용 — STEP 0 관찰): renderList() 만 호출하고 통계 갱신은 없었습니다.
+//   → 리스트에는 할 일 2개가 보이는데 뱃지·요약·진행률은 전부 0인 채 멈춰 있는
+//     "데이터-화면 불일치" 상태로 페이지가 열렸습니다.
+// renderList(); // ← 이 한 줄만 있었고, renderStats() 는 호출되지 않았습니다.
+
+// ✅ 해결: 두 렌더 함수를 모두 호출해 해결했지만 — 새 화면 조각이 늘어날 때마다
+//          사람이 이 호출 목록에 한 줄씩 "추가"해야 하는 구조적 문제는 그대로 남습니다
+//          (STEP 5의 refresh(), 그리고 미션 2의 React로 이어지는 지점).
 renderList();
-// TODO (STEP 1): renderStats() 구현 후 이 줄의 주석을 해제하세요.
 renderStats();
